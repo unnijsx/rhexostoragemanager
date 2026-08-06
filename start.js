@@ -32,12 +32,28 @@ if (!fs.existsSync(path.join(backendDir, 'node_modules')) || !fs.existsSync(path
   execSync('npm run install-backend', { stdio: 'inherit' });
 }
 
-// 2. Run migrations
-console.log('Running Prisma database migrations...');
-try {
-  execSync('npx prisma migrate deploy', { cwd: backendDir, stdio: 'inherit' });
-} catch (err) {
-  console.error('Migration failed, starting server anyway:', err.message);
+// 2. Run migrations / DB push depending on schema provider
+const schemaPath = path.join(backendDir, 'prisma/schema.prisma');
+let isMongodb = false;
+if (fs.existsSync(schemaPath)) {
+  const schemaContent = fs.readFileSync(schemaPath, 'utf8');
+  isMongodb = schemaContent.includes('provider = "mongodb"') || schemaContent.includes('provider = \'mongodb\'');
+}
+
+if (isMongodb) {
+  console.log('Running Prisma database schema push for MongoDB...');
+  try {
+    execSync('npx prisma db push', { cwd: backendDir, stdio: 'inherit' });
+  } catch (err) {
+    console.error('Schema push failed:', err.message);
+  }
+} else {
+  console.log('Running Prisma database migrations...');
+  try {
+    execSync('npx prisma migrate deploy', { cwd: backendDir, stdio: 'inherit' });
+  } catch (err) {
+    console.error('Migration failed, starting server anyway:', err.message);
+  }
 }
 
 // 3. Boot the backend server
