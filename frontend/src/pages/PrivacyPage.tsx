@@ -47,7 +47,7 @@ export function PrivacyPage() {
                 <strong className="text-white">Authentication:</strong> We use your Google profile (email and name) to authenticate you and connect your Google Drive accounts.
               </li>
               <li>
-                <strong className="text-white">Drive Scope (Full Access):</strong> The app requires the <code className="bg-slate-800 px-1.5 py-0.5 rounded text-indigo-300 text-xs">/auth/drive</code> scope to create the dedicated <code className="bg-slate-800 px-1.5 py-0.5 rounded text-indigo-300 text-xs">rheoxstoragemanager</code> folder, sync metadata, and upload files directly to your personal Drive storage.
+                <strong className="text-white">Drive Scope (Full Access):</strong> The app requires the <code className="bg-slate-800 px-1.5 py-0.5 rounded text-indigo-300 text-xs">/auth/drive</code> scope to create the dedicated <code className="bg-slate-800 px-1.5 py-0.5 rounded text-indigo-300 text-xs">rheoxdrivermanager</code> folder, sync metadata, and upload files directly to your personal Drive storage.
               </li>
               <li>
                 <strong className="text-white">Zero Server Storage:</strong> Your files uploaded through the gateway are streamed directly to Google Drive. We do not store or host your uploaded files on our servers' physical disk.

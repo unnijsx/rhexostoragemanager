@@ -2,14 +2,14 @@
 
 # Rheox Storage Manager
 
-Rheox Storage Manager is a storage gateway web app for connecting multiple Google Drive accounts into one virtual storage dashboard. Users can register with email/password or Google, automatically connect their first Google Drive account during Google sign-in, track quota, upload files into a dedicated `rheoxstoragemanager` Drive folder, organize files with virtual folders, preview files, sync MySQL from Google Drive, and let the backend route uploads to the Drive account with enough free space.
+Rheox Storage Manager is a storage gateway web app for connecting multiple Google Drive accounts into one virtual storage dashboard. Users can register with email/password or Google, automatically connect their first Google Drive account during Google sign-in, track quota, upload files into a dedicated `rheoxdrivermanager` Drive folder, organize files with virtual folders, preview files, sync MySQL from Google Drive, and let the backend route uploads to the Drive account with enough free space.
 
 ## Features
 
 - Google Drive and S3-compatible storage gateway in one virtual storage dashboard.
 - S3-compatible storage support with custom endpoints for providers like MinIO, Cloudflare R2, Wasabi, Backblaze B2, and AWS S3.
 - Direct upload stream to Google Drive. Files are not stored on the server.
-- Google Drive uploads are stored under a root `rheoxstoragemanager` folder.
+- Google Drive uploads are stored under a root `rheoxdrivermanager` folder.
 - Direct upload stream to S3-compatible storage through the backend without exposing storage credentials to the frontend.
 - Upload routing policies with most-available, round-robin, and priority-order modes.
 - External upload API using API keys at `POST /api/v1/uploads`.
@@ -17,7 +17,7 @@ Rheox Storage Manager is a storage gateway web app for connecting multiple Googl
 - Email/password auth plus Google sign-in/register with automatic first Drive connection.
 - Multi-account storage quota summary.
 - Quota tracker page.
-- Manual sync from the Google Drive `rheoxstoragemanager` folder back into MySQL.
+- Manual sync from the Google Drive `rheoxdrivermanager` folder back into MySQL.
 - Virtual folders.
 - File preview, download, rename, move, and delete actions.
 - In-app API documentation with cURL and JavaScript upload examples.
@@ -257,7 +257,7 @@ https://www.googleapis.com/auth/userinfo.email
 https://www.googleapis.com/auth/userinfo.profile
 ```
 
-Full Drive access is required so Google sign-in can connect the first Drive account automatically and sync files manually added to the `rheoxstoragemanager` folder.
+Full Drive access is required so Google sign-in can connect the first Drive account automatically and sync files manually added to the `rheoxdrivermanager` folder.
 
 5. If publishing status is `Testing`, add test users.
 
@@ -561,8 +561,8 @@ http://localhost:5173
 6. Confirm quota appears.
 7. Open `All Files`.
 8. Create nested virtual folders.
-9. Upload a file and confirm it appears under Google Drive root folder `rheoxstoragemanager`.
-10. Add or remove a file manually inside Google Drive folder `rheoxstoragemanager`, then click `Sync Drive` in All Files.
+9. Upload a file and confirm it appears under Google Drive root folder `rheoxdrivermanager`.
+10. Add or remove a file manually inside Google Drive folder `rheoxdrivermanager`, then click `Sync Drive` in All Files.
 11. Watch bottom-right upload progress.
 12. Right-click file row for actions:
 
@@ -654,7 +654,7 @@ file
 ## Security Notes
 
 - Backend never stores uploaded files on disk.
-- Uploads are streamed through the backend to Google Drive folder `rheoxstoragemanager`.
+- Uploads are streamed through the backend to Google Drive folder `rheoxdrivermanager`.
 - Google tokens are encrypted in MySQL.
 - Refresh tokens for app sessions are hashed in MySQL.
 - Google auth handoff tokens, public share tokens, and preview tokens are hashed before lookup/use.
