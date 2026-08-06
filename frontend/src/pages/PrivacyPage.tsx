@@ -11,7 +11,7 @@ export function PrivacyPage() {
         <Link to="/" className="flex items-center gap-3">
           <BrandLogo className="h-8 w-8" />
           <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-indigo-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
-            Rheox
+            RHX Drive Manager
           </span>
         </Link>
         <Link to="/">
@@ -32,14 +32,14 @@ export function PrivacyPage() {
           <section className="card p-6 md:p-8 rounded-2xl">
             <h2 className="text-xl font-bold mb-4 text-white">1. Introduction</h2>
             <p className="text-slate-400">
-              Welcome to Rheox. We are committed to protecting your privacy and security. This Privacy Policy explains how we collect, use, and protect your information when you use our storage gateway app.
+              Welcome to RHX Drive Manager. We are committed to protecting your privacy and security. This Privacy Policy explains how we collect, use, and protect your information when you use our storage gateway app.
             </p>
           </section>
 
           <section className="card p-6 md:p-8 rounded-2xl">
             <h2 className="text-xl font-bold mb-4 text-white">2. Google API Services User Data Policy</h2>
             <p className="text-slate-400 mb-4">
-              Rheox's use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">Google API Services User Data Policy</a>, including the Limited Use requirements.
+              RHX Drive Manager's use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">Google API Services User Data Policy</a>, including the Limited Use requirements.
             </p>
             <h3 className="font-bold text-white mb-2">How we use Google user data:</h3>
             <ul className="list-disc pl-5 space-y-2 text-slate-400">
@@ -73,7 +73,7 @@ export function PrivacyPage() {
 
       {/* Footer */}
       <footer className="w-full max-w-4xl mx-auto px-6 py-8 border-t border-slate-200/10 flex items-center justify-between text-xs text-slate-500">
-        <span>© {new Date().getFullYear()} Rheox. All rights reserved.</span>
+        <span>© {new Date().getFullYear()} RHX Drive Manager. All rights reserved.</span>
         <div className="flex gap-4">
           <Link to="/terms" className="hover:text-indigo-400">Terms & Conditions</Link>
         </div>

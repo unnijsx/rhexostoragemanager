@@ -52,9 +52,9 @@ export function PublicFilePage({ embed = false }: { embed?: boolean }) {
   }, [token])
 
   useEffect(() => {
-    document.title = file ? `${file.name} | Rheox` : 'Shared file | Rheox'
+    document.title = file ? `${file.name} | RHX Drive Manager` : 'Shared file | RHX Drive Manager'
     return () => {
-      document.title = 'Rheox'
+      document.title = 'RHX Drive Manager'
     }
   }, [file])
 

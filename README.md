@@ -1,4 +1,4 @@
-![RHX Storage Manager cover](https://i.ibb.co.com/35BySv1C/image.png)
+![RHX Storage Manager Logo](frontend/src/assets/rheox.png)
 
 # RHX Storage Manager
 
@@ -34,9 +34,7 @@ RHX Storage Manager is a storage gateway web app for connecting multiple Google 
 
 Live preview: https://rheoxstoragemanager.zenhosta.com
 
-![RHX Storage Manager dashboard preview](https://i.ibb.co.com/HLjG3JRf/image.png)
-
-![RHX Storage Manager shared file preview](https://i.ibb.co.com/QLpYGmx/image.png)
+![RHX Storage Manager Logo](frontend/src/assets/rheox.png)
 
 ## Star History
 

@@ -10,9 +10,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'pwa-192x192.svg', 'pwa-512x512.svg', 'maskable-icon.svg'],
       manifest: {
-        name: 'Rheox',
-        short_name: 'Rheox',
-        description: 'Rheox storage gateway for files, folders, sharing, and quota tracking.',
+        name: 'RHX Drive Manager',
+        short_name: 'RHX Drive Manager',
+        description: 'RHX Drive Manager storage gateway for files, folders, sharing, and quota tracking.',
         theme_color: '#2563eb',
         background_color: '#ffffff',
         display: 'standalone',
