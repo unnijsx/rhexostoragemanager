@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /$
+Allow: /login
+Allow: /register
+Allow: /privacy
+Allow: /terms
+Disallow: /all-files
+Disallow: /settings
+Disallow: /quota-tracker
+Disallow: /shared
+Disallow: /activity-log
+Disallow: /trash
+
+Sitemap: https://drive.rheox.online/sitemap.xml
