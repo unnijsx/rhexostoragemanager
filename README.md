@@ -1,8 +1,8 @@
-![Rheox Storage Manager cover](https://i.ibb.co.com/35BySv1C/image.png)
+![RHX Storage Manager cover](https://i.ibb.co.com/35BySv1C/image.png)
 
-# Rheox Storage Manager
+# RHX Storage Manager
 
-Rheox Storage Manager is a storage gateway web app for connecting multiple Google Drive accounts into one virtual storage dashboard. Users can register with email/password or Google, automatically connect their first Google Drive account during Google sign-in, track quota, upload files into a dedicated `rheoxdrivermanager` Drive folder, organize files with virtual folders, preview files, sync MySQL from Google Drive, and let the backend route uploads to the Drive account with enough free space.
+RHX Storage Manager is a storage gateway web app for connecting multiple Google Drive accounts into one virtual storage dashboard. Users can register with email/password or Google, automatically connect their first Google Drive account during Google sign-in, track quota, upload files into a dedicated `rheoxdrivermanager` Drive folder, organize files with virtual folders, preview files, sync MySQL from Google Drive, and let the backend route uploads to the Drive account with enough free space.
 
 ## Features
 
@@ -34,9 +34,9 @@ Rheox Storage Manager is a storage gateway web app for connecting multiple Googl
 
 Live preview: https://rheoxstoragemanager.zenhosta.com
 
-![Rheox Storage Manager dashboard preview](https://i.ibb.co.com/HLjG3JRf/image.png)
+![RHX Storage Manager dashboard preview](https://i.ibb.co.com/HLjG3JRf/image.png)
 
-![Rheox Storage Manager shared file preview](https://i.ibb.co.com/QLpYGmx/image.png)
+![RHX Storage Manager shared file preview](https://i.ibb.co.com/QLpYGmx/image.png)
 
 ## Star History
 
@@ -72,14 +72,14 @@ password: empty
 The easiest way to set up and run the project is using the automated setup script. It automatically generates all environment files with secure keys, installs dependencies, handles Prisma migrations, and configures either **SQLite** (zero installation/config) or **MySQL**.
 
 ### Windows (PowerShell)
-Make sure to open PowerShell and navigate to the project directory first. For example, if you cloned the project to `E:\AUTO KLIK\Rheox Storage Manager`:
+Make sure to open PowerShell and navigate to the project directory first. For example, if you cloned the project to `E:\AUTO KLIK\RHX Storage Manager`:
 
 ```powershell
 # 1. Switch to the drive where the project is located (if necessary)
 E:
 
 # 2. Navigate to the project folder
-cd "E:\AUTO KLIK\Rheox Storage Manager"
+cd "E:\AUTO KLIK\RHX Storage Manager"
 
 # 3. Run the automated setup script
 powershell -ExecutionPolicy Bypass -File .\setup.ps1
@@ -481,7 +481,7 @@ docker compose down -v
 
 ### VPS Deployment (Step-by-Step)
 
-Follow these steps to deploy Rheox Storage Manager to a VPS (such as Ubuntu/Debian) using Docker:
+Follow these steps to deploy RHX Storage Manager to a VPS (such as Ubuntu/Debian) using Docker:
 
 #### 1. Install Docker & Docker Compose on your VPS
 ```bash
@@ -492,7 +492,7 @@ sudo systemctl enable --now docker
 
 #### 2. Clone the Repository
 ```bash
-git clone https://github.com/your-github-username/rheoxstoragemanager.git
+git clone https://github.com/unnijsx/rhexostoragemanager.git
 cd rheoxstoragemanager
 ```
 
@@ -683,7 +683,7 @@ The config is automatically encrypted and saved into the database, enabling Goog
 
 ## Automated Updates & PM2 Management
 
-For native VPS setups running with PM2, Rheox Storage Manager includes a fully automated system update trigger and log monitor in the **Settings** UI.
+For native VPS setups running with PM2, RHX Storage Manager includes a fully automated system update trigger and log monitor in the **Settings** UI.
 
 ### How it works
 1. When you trigger an update from the frontend dashboard, the backend triggers the `update.sh` script in the background.

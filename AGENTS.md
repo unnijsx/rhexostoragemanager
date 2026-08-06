@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Rheox Storage Manager is a Google Drive storage gateway. It lets users register/login with email/password or Google, automatically connect the first Drive account during Google sign-in, connect additional Google Drive accounts, track combined quota, upload files through the backend into a dedicated Google Drive `rheoxdrivermanager` folder, organize files in virtual folders, preview/download/share files, sync MySQL file records from Google Drive, invite other users to files/folders, and route uploads to a connected Drive account with enough free space.
+RHX Storage Manager is a Google Drive storage gateway. It lets users register/login with email/password or Google, automatically connect the first Drive account during Google sign-in, connect additional Google Drive accounts, track combined quota, upload files through the backend into a dedicated Google Drive `rheoxdrivermanager` folder, organize files in virtual folders, preview/download/share files, sync MySQL file records from Google Drive, invite other users to files/folders, and route uploads to a connected Drive account with enough free space.
 
 ## Repository Structure
 
