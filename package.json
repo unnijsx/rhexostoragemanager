@@ -1,0 +1,10 @@
+{
+  "name": "rhx-root",
+  "version": "1.0.0",
+  "description": "Root manager for RHX Pterodactyl deployment",
+  "main": "start.js",
+  "type": "module",
+  "scripts": {
+    "install-backend": "cd backend && npm install && npm run build"
+  }
+}
