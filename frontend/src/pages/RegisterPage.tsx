@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { HardDrive } from 'lucide-react'
+import { BrandLogo } from '@/components/drive/BrandLogo'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { GoogleLogo } from '@/components/auth/GoogleLogo'
@@ -35,25 +35,46 @@ export function RegisterPage() {
   useEffect(() => {
     if (!recaptchaSiteKey) return
     const scriptId = 'google-recaptcha-script'
+    const callbackName = 'onRecaptchaLoad'
+
     const renderCaptcha = () => {
-      if (!recaptchaRef.current || !window.grecaptcha || recaptchaWidgetId.current !== null) return
-      recaptchaWidgetId.current = window.grecaptcha.render(recaptchaRef.current, {
-        sitekey: recaptchaSiteKey,
-        callback: setCaptchaToken,
-        'expired-callback': () => setCaptchaToken(''),
-      })
+      if (!recaptchaRef.current || !window.grecaptcha || typeof window.grecaptcha.render !== 'function' || recaptchaWidgetId.current !== null) return
+      try {
+        recaptchaWidgetId.current = window.grecaptcha.render(recaptchaRef.current, {
+          sitekey: recaptchaSiteKey,
+          callback: setCaptchaToken,
+          'expired-callback': () => setCaptchaToken(''),
+        })
+      } catch (err) {
+        console.error('reCAPTCHA render error:', err)
+      }
     }
 
-    if (!document.getElementById(scriptId)) {
-      const script = document.createElement('script')
-      script.id = scriptId
-      script.src = 'https://www.google.com/recaptcha/api.js?render=explicit'
-      script.async = true
-      script.defer = true
-      script.onload = renderCaptcha
-      document.body.appendChild(script)
-    } else {
+    // Set global callback
+    ;(window as any)[callbackName] = () => {
       renderCaptcha()
+    }
+
+    const script = document.getElementById(scriptId) as HTMLScriptElement | null
+    if (!script) {
+      const newScript = document.createElement('script')
+      newScript.id = scriptId
+      newScript.src = `https://www.google.com/recaptcha/api.js?onload=${callbackName}&render=explicit`
+      newScript.async = true
+      newScript.defer = true
+      document.body.appendChild(newScript)
+    } else {
+      if (window.grecaptcha && typeof window.grecaptcha.render === 'function') {
+        renderCaptcha()
+      } else {
+        const interval = setInterval(() => {
+          if (window.grecaptcha && typeof window.grecaptcha.render === 'function') {
+            renderCaptcha()
+            clearInterval(interval)
+          }
+        }, 100)
+        return () => clearInterval(interval)
+      }
     }
   }, [])
 
@@ -95,7 +116,7 @@ export function RegisterPage() {
     <main className="flex min-h-screen items-center justify-center bg-slate-50 p-5">
       <Card className="w-full max-w-md p-6">
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white"><HardDrive className="h-6 w-6" /></div>
+          <BrandLogo className="h-11 w-11" />
           <div><h1 className="text-2xl font-extrabold">Register</h1><p className="text-sm text-slate-500">Create your storage gateway account.</p></div>
         </div>
         <form onSubmit={submit} className="mt-6 grid gap-4">

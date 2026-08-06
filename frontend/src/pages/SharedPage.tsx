@@ -40,8 +40,8 @@ export function SharedPage() {
 
   useEffect(() => {
     loadInvites().catch((error) => setMessage(error instanceof Error ? error.message : 'Failed to load shared resources'))
-    window.addEventListener('9drive:invites-changed', loadInvites)
-    return () => window.removeEventListener('9drive:invites-changed', loadInvites)
+    window.addEventListener('rheoxstoragemanager:invites-changed', loadInvites)
+    return () => window.removeEventListener('rheoxstoragemanager:invites-changed', loadInvites)
   }, [])
 
   async function revokeInvite(id: string) {

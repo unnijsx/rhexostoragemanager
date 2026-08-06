@@ -35,7 +35,7 @@ const sizeActiveClasses: Record<FolderSizeScale, string> = {
 
 type FileViewMode = 'list' | 'grid'
 
-const fileViewStorageKey = '9drive:all-files-view-mode'
+const fileViewStorageKey = 'rheoxstoragemanager:all-files-view-mode'
 
 function getStoredFileViewMode(): FileViewMode {
   const stored = localStorage.getItem(fileViewStorageKey)
@@ -130,7 +130,7 @@ export function AllFilesPage() {
   const [inviting, setInviting] = useState(false)
   const previewVideoRef = useRef<HTMLVideoElement | null>(null)
   const [folderSizeScale, setFolderSizeScale] = useState<FolderSizeScale>(() => {
-    const v = localStorage.getItem('9drive:folder-size')
+    const v = localStorage.getItem('rheox:folder-size')
     return (v === 'xs' || v === 'sm' || v === 'md' || v === 'lg') ? v : 'md'
   })
   const { setHeaderActions } = useDriveLayoutActions()
@@ -139,7 +139,7 @@ export function AllFilesPage() {
 
   function changeFolderSize(scale: FolderSizeScale) {
     setFolderSizeScale(scale)
-    localStorage.setItem('9drive:folder-size', scale)
+    localStorage.setItem('rheox:folder-size', scale)
   }
 
   async function loadFiles() {
@@ -242,10 +242,10 @@ export function AllFilesPage() {
     }
 
     window.addEventListener('keydown', onKey)
-    window.addEventListener('9drive:open-move-modal', onOpenMoveShortcut)
+    window.addEventListener('rheoxstoragemanager:open-move-modal', onOpenMoveShortcut)
     return () => {
       window.removeEventListener('keydown', onKey)
-      window.removeEventListener('9drive:open-move-modal', onOpenMoveShortcut)
+      window.removeEventListener('rheoxstoragemanager:open-move-modal', onOpenMoveShortcut)
     }
   }, [activeFolderForMenu, cutFolder, activeFolderId])
 
@@ -316,7 +316,7 @@ export function AllFilesPage() {
 
       setMessage(`Google Drive synced. ${created} added, ${updated} updated, ${deleted} removed across ${accounts} account${accounts === 1 ? '' : 's'}.`)
       await loadAll()
-      window.dispatchEvent(new Event('9drive:storage-changed'))
+      window.dispatchEvent(new Event('rhx:storage-changed'))
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Failed to sync Google Drive')
     } finally {
@@ -453,7 +453,7 @@ export function AllFilesPage() {
       const url = URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = url
-      link.download = '9drive-download.zip'
+      link.download = 'rheoxstoragemanager-download.zip'
       link.click()
       URL.revokeObjectURL(url)
       clearSelection()
@@ -494,7 +494,7 @@ export function AllFilesPage() {
     setDeleteOpen(false)
     clearSelection()
     await loadFiles()
-    window.dispatchEvent(new Event('9drive:storage-changed'))
+    window.dispatchEvent(new Event('rhx:storage-changed'))
   }
 
   async function shareFile() {
@@ -567,7 +567,7 @@ export function AllFilesPage() {
       setInviteEmail('')
       setInviteRole('viewer')
       setInviteMessage('Invite saved. Member will appear in Shared.')
-      window.dispatchEvent(new Event('9drive:invites-changed'))
+      window.dispatchEvent(new Event('rheoxstoragemanager:invites-changed'))
     } catch (error) {
       setInviteMessage(error instanceof Error ? error.message : 'Failed to send invite')
     } finally {
@@ -622,8 +622,8 @@ export function AllFilesPage() {
     function handleUploadCompleted() {
       loadAll().catch(() => undefined)
     }
-    window.addEventListener('9drive:upload-completed', handleUploadCompleted)
-    return () => window.removeEventListener('9drive:upload-completed', handleUploadCompleted)
+    window.addEventListener('rhx:upload-completed', handleUploadCompleted)
+    return () => window.removeEventListener('rhx:upload-completed', handleUploadCompleted)
   }, [activeFolderId])
 
   useEffect(() => {
@@ -776,7 +776,7 @@ export function AllFilesPage() {
       <DummyModal open={shareOpen} title="Share Link" description={activeFile?.name ?? ''} onClose={() => setShareOpen(false)}>
         <div className="grid gap-4">
           <div>
-            <label className="text-xs font-bold text-slate-500 block mb-1">9Drive Public Share Link (No GDrive login required)</label>
+            <label className="text-xs font-bold text-slate-500 block mb-1">Rheox Storage Manager Public Share Link (No GDrive login required)</label>
             <Input value={shareUrl} readOnly />
           </div>
           <div className="flex justify-end gap-3">

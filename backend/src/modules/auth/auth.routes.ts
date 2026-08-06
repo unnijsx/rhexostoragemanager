@@ -80,7 +80,13 @@ authRouter.get('/google/url', async (_req, res, next) => {
       state,
     })
     return res.json({ url })
-  } catch (error) {
+  } catch (error: any) {
+    if (error.code === 'P2025' || error.name === 'NotFoundError') {
+      return res.status(400).json({
+        code: 'GOOGLE_AUTH_NOT_CONFIGURED',
+        message: 'Google Sign-In is not configured on this server. Please sign up or log in with email/password, or configure Google credentials in Settings.',
+      })
+    }
     return next(error)
   }
 })

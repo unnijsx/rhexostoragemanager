@@ -17,12 +17,18 @@ import { ApiManagementPage } from '@/pages/ApiManagementPage'
 import { TrashPage } from '@/pages/TrashPage'
 import { ActivityLogPage } from '@/pages/ActivityLogPage'
 import { UploadProvider } from '@/context/UploadContext'
+import { HomePage } from '@/pages/HomePage'
+import { PrivacyPage } from '@/pages/PrivacyPage'
+import { TermsPage } from '@/pages/TermsPage'
 
 
 function App() {
   return (
     <UploadProvider>
       <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="privacy" element={<PrivacyPage />} />
+      <Route path="terms" element={<TermsPage />} />
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
       <Route path="google-auth" element={<GoogleAuthPage />} />
@@ -31,7 +37,6 @@ function App() {
       <Route path="public/files/:token/embed" element={<PublicFilePage embed />} />
       <Route element={<ProtectedRoute />}>
         <Route element={<DriveLayout />}>
-          <Route index element={<Navigate to="/all-files" replace />} />
           <Route path="all-files" element={<AllFilesPage />} />
           <Route path="quota" element={<QuotaTrackerPage />} />
           <Route path="shared" element={<SharedPage />} />

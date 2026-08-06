@@ -88,23 +88,33 @@ storageRouter.patch('/routing-policy', async (req: AuthRequest, res, next) => {
 
 storageRouter.get('/breakdown', async (req: AuthRequest, res, next) => {
   try {
-    const rows = await prisma.$queryRaw<BreakdownRow[]>`
-      SELECT
-        CASE
-          WHEN mime_type LIKE 'image/%' THEN 'photo'
-          WHEN mime_type LIKE 'video/%' THEN 'video'
-          ELSE 'document'
-        END AS kind,
-        COALESCE(SUM(size_bytes), 0) AS bytes
-      FROM files
-      WHERE user_id = ${req.user!.id} AND status = 'active'
-      GROUP BY kind
-    `
-    const breakdown = { photo: '0', video: '0', document: '0' }
-    for (const row of rows) {
-      if (row.kind === 'photo' || row.kind === 'video' || row.kind === 'document') breakdown[row.kind] = bytesToString(row.bytes)
+    const activeFiles = await prisma.file.findMany({
+      where: {
+        userId: req.user!.id,
+        status: 'active',
+      },
+      select: {
+        mimeType: true,
+        sizeBytes: true,
+      },
+    })
+
+    const breakdown = { photo: 0n, video: 0n, document: 0n }
+    for (const file of activeFiles) {
+      if (file.mimeType.startsWith('image/')) {
+        breakdown.photo += file.sizeBytes
+      } else if (file.mimeType.startsWith('video/')) {
+        breakdown.video += file.sizeBytes
+      } else {
+        breakdown.document += file.sizeBytes
+      }
     }
-    return res.json(breakdown)
+
+    return res.json({
+      photo: breakdown.photo.toString(),
+      video: breakdown.video.toString(),
+      document: breakdown.document.toString(),
+    })
   } catch (error) {
     return next(error)
   }

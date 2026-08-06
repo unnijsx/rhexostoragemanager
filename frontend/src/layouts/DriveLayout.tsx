@@ -87,8 +87,8 @@ function SystemInfoDropdown({ storage }: { storage: any }) {
         <div>
           <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5"><HardDrive className="h-3.5 w-3.5 text-blue-500" /> Storage Engine</h4>
           <div className="mt-2 text-xs text-slate-600 space-y-1 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-            <p>• <b>DB Type:</b> SQLite (Local Database)</p>
-            <p>• <b>Upload Folder:</b> Google Drive dedicated <code>9drive</code></p>
+            <p>• <b>DB Type:</b> MongoDB (Replica Set)</p>
+            <p>• <b>Upload Folder:</b> Google Drive dedicated <code>rheoxstoragemanager</code></p>
             <p>• <b>Max Upload Size:</b> 5 GB per stream</p>
           </div>
         </div>
@@ -129,7 +129,7 @@ function Sidebar({ onNavigate, user, storage, breakdown, onLogout }: { onNavigat
     <aside className="flex h-full w-64 flex-col border-slate-200/60 bg-slate-50/40 backdrop-blur-xl p-4 lg:border-r">
       <div className="flex items-center gap-2.5 pb-3 pt-1">
         <BrandLogo className="h-8 w-8" />
-        <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">9Drive</span>
+        <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Rheox</span>
       </div>
 
       <div className="flex items-center gap-2.5 border-y border-slate-200/60 py-3 my-3">
@@ -218,7 +218,7 @@ export function DriveLayout() {
   const { uploadProgress, setUploadProgress, retryFailedUpload } = useUpload()
   const [uploadProgressCollapsed, setUploadProgressCollapsed] = useState(false)
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    const saved = localStorage.getItem('9drive:theme')
+    const saved = localStorage.getItem('rheox:theme')
     if (saved === 'light' || saved === 'dark') return saved
     return 'dark'
   })
@@ -254,7 +254,7 @@ export function DriveLayout() {
       root.classList.add('light')
       root.classList.remove('dark')
     }
-    localStorage.setItem('9drive:theme', theme)
+    localStorage.setItem('rheox:theme', theme)
   }, [theme])
 
   function toggleTheme() {
@@ -370,8 +370,8 @@ export function DriveLayout() {
       .catch(() => undefined)
     loadSidebarStats().catch(() => undefined)
     loadConnectedAccounts().catch(() => undefined)
-    window.addEventListener('9drive:storage-changed', loadSidebarStats)
-    return () => window.removeEventListener('9drive:storage-changed', loadSidebarStats)
+    window.addEventListener('rhx:storage-changed', loadSidebarStats)
+    return () => window.removeEventListener('rhx:storage-changed', loadSidebarStats)
   }, [])
 
   useEffect(() => {
@@ -406,7 +406,7 @@ export function DriveLayout() {
                 </Button>
                 <div className="flex min-w-0 items-center gap-2">
                   <BrandLogo className="h-9 w-9 shrink-0" />
-                  <span className="truncate text-xl font-extrabold tracking-tight">9Drive</span>
+                  <span className="truncate text-xl font-extrabold tracking-tight">Rheox Storage Manager</span>
                 </div>
               </div>
               <div className="flex gap-2">
